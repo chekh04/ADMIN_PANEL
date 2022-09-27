@@ -1,0 +1,44 @@
+:host {
+  .settings-block {
+    display: flex;
+    flex-direction: column;
+    .form {
+      width: 70%;
+      margin: auto;
+      display: grid;
+      grid-gap: 1em;
+      grid-template-areas:
+                          "a b"
+                          "c d";
+      .formcontrol-wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+        .error {
+          font-size: 14px;
+          color: #e63d3d;
+          margin-top: 4px;
+          margin-bottom: -15px;
+        }
+      }
+      .formcontrol-wrapper:nth-child(1) {
+        grid-area: a;
+      }
+      .formcontrol-wrapper:nth-child(2) {
+        grid-area: b;
+      }
+      .formcontrol-wrapper:nth-child(3) {
+        grid-area: c;
+      }
+      .formcontrol-wrapper:nth-child(4) {
+        grid-area: d;
+      }
+      button {
+        align-self: flex-end;
+        height: 40px !important;
+        background-color: #000000 !important;
+      }
+    }
+
+  }
+
+}

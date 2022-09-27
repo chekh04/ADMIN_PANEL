@@ -1,0 +1,49 @@
+<div class="modal">
+  <div class="modal-title">Add ticket</div>
+  <form [formGroup]="form" (ngSubmit)="onSave()" class="modal-form">
+    <div class="add-file">
+      <img src="./assets/icons/add-file-icon.svg" alt="file">
+      <div class="label">Add photo</div>
+    </div>
+    <div class="formcontrol-wrapper">
+      <input  (change)="readUrl($event)" type="file">
+    </div>
+    <!--    <img [src]="url" alt="">-->
+
+    <div class="formcontrol-wrapper">
+      <input
+        formControlName="name"
+        label="name"
+        placeholder="Name"
+        appAdminInput>
+    </div>
+    <div class="form-date-wrapper">
+      <div class="admin-input-label">Date</div>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input [disabled]="true" matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  [disabled]="false" #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="formcontrol-wrapper">
+      <input
+        formControlName="email"
+        label="email"
+        placeholder="Email"
+        appAdminInput>
+    </div>
+    <div class="formcontrol-wrapper">
+      <input
+        formControlName="address"
+        label="address"
+        placeholder="Address"
+        appAdminInput>
+    </div>
+
+    <div class="form-buttons">
+      <button appAdminButton >Save</button>
+      <button appAdminButton class="cancel-btn">Cancel</button>
+    </div>
+  </form>
+</div>

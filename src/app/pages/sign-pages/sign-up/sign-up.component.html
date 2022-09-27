@@ -1,0 +1,124 @@
+<div class="wrapper">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-logo">
+        <img src="./assets/icons/sidenav-icons/panel-logo.svg" alt="logo">
+        <div class="logo-text">Dashboard Kit</div>
+      </div>
+      <div class="modal-title">Sign Up</div>
+      <div class="modal-subtitle">Create a new account</div>
+    </div>
+    <form
+      [formGroup]="form"
+      class="modal-body"
+      (ngSubmit)="submitForm()">
+      <div class="formcontrol-wrapper">
+        <input
+          formControlName="email"
+        appAdminInput
+        label="email"
+        placeholder="Email"
+        type="text">
+          <p
+            *ngIf="this.form.get('email').touched && this.form.get('email').errors?.required"
+            class="error"
+            [@fadeInOut]>
+            This field is required
+          </p>
+          <p
+            *ngIf="this.form.get('email').touched && this.form.get('email')?.errors?.email"
+            class="error"
+            [@fadeInOut]>
+            Enter correct email
+          </p>
+      </div>
+      <div class="formcontrol-wrapper">
+        <input
+          formControlName="name"
+        appAdminInput
+        label="first name"
+        placeholder="First name"
+        type="text">
+        <p
+          *ngIf="this.form.get('name').touched && this.form.get('name').errors?.required"
+          class="error"
+          [@fadeInOut]>
+          This field is required
+        </p>
+        <p
+          *ngIf="this.form.get('name').touched && this.form.get('name')?.errors?.latin"
+          class="error"
+          [@fadeInOut]>
+          Please use only latin
+        </p>
+      </div>
+      <div class="formcontrol-wrapper">
+        <input
+          formControlName="surname"
+        appAdminInput
+        label="last name"
+        placeholder="Last name"
+        type="text">
+        <p
+          *ngIf="this.form.get('surname').touched && this.form.get('surname').errors?.required"
+          class="error"
+          [@fadeInOut]>
+          This field is required
+        </p>
+        <p
+          *ngIf="this.form.get('surname').touched && this.form.get('surname')?.errors?.latin"
+          class="error"
+          [@fadeInOut]>
+          Please use only latin
+        </p>
+      </div>
+<div formGroupName="passwords" class="passwords">
+  <div class="password-input">
+    <input
+      #password
+      formControlName="password"
+      appAdminInput
+      label="password"
+      placeholder="Password"
+      type="password">
+    <img (click)="changePasswordInputType(password)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
+  </div>
+          <p
+            *ngIf="this.form.get('passwords').get('password').touched && this.form.get('passwords').get('password').errors?.required"
+            class="error"
+            [@fadeInOut]>
+            This field is required
+          </p>
+  <div class="password-input">
+    <input
+      #confirmPassword
+      formControlName="confirmPassword"
+      appAdminInput
+      label="confirm password"
+      placeholder="Confirm password"
+      type="password">
+    <img (click)="changePasswordInputType(confirmPassword)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
+  </div>
+          <p
+            *ngIf="this.form.get('passwords').get('confirmPassword').touched && this.form.get('passwords').get('confirmPassword').errors?.required"
+            class="error"
+            [@fadeInOut]>
+            This field is required
+          </p>
+  <p
+    *ngIf="
+    this.form.get('passwords').get('confirmPassword').touched &&
+    !this.form.get('passwords').get('confirmPassword').errors?.required &&
+    this.form.get('passwords').errors?.notSame"
+    class="error"
+    [@fadeInOut]>
+    Confirm password is wrong
+  </p>
+</div>
+
+      <button class="modal-btn">Register</button>
+    </form>
+
+
+  </div>
+</div>

@@ -1,0 +1,124 @@
+:host {
+  .modal {
+    .modal-title {
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 0.3px;
+      color: #252733;
+      text-align: center;
+    }
+
+    .add-file {
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+
+      .label {
+        margin-left: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        color: #252733;
+      }
+    }
+
+    .modal-form {
+      .form-date-wrapper {
+        margin-top: 15px;
+
+        .admin-input-label {
+          font-weight: 700;
+          font-size: 13px;
+          letter-spacing: 0.9px;
+          text-transform: uppercase;
+          color: #9FA2B4;
+        }
+      }
+
+      .select-wrapper {
+        margin-top: 15px;
+      }
+
+      .form-buttons {
+        display: flex;
+        flex-direction: column;
+
+        button {
+          letter-spacing: 0.8px;
+        }
+
+        .cancel-btn {
+          background-color: transparent !important;
+          color: #3751FF !important;
+        }
+      }
+    }
+  }
+}
+
+  :host::ng-deep {
+    mat-datepicker-toggle {
+      button {
+        background: url("../../../../../assets/icons/calendar-icon.svg") center no-repeat;
+        span {
+          display: none;
+        }
+      }
+    }
+    mat-form-field {
+      width: 100%;
+    }
+    .mat-form-field {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      height: 40px;
+      background: #f8f8f8;
+      border: 1px solid #cacaca;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      color: #4B506D;
+      opacity: 0.4;
+    }
+    .mat-form-field-wrapper {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+    .mat-form-field-flex {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      width: 95%;
+      height: 100%;
+      margin: auto;
+    }
+    .mat-input-element {
+      height: 100%;
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+    .mat-form-field-infix {
+      border-top: 0;
+      padding: 0;
+      height: 100%;
+    }
+    .admin-input-label {
+      margin-bottom: 5px;
+    }
+    label {
+      transform: translateY(3px) !important;
+    }
+    .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      display: none !important;
+    }
+    .mat-form-field-flex {
+      background-color: transparent;
+    }
+    .mat-select-arrow-wrapper {
+      transform: translateY(0) !important;
+    }
+  }

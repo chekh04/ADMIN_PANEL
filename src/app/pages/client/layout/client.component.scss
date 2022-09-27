@@ -1,0 +1,22 @@
+.client-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .sidenav {
+    width: 20%;
+  }
+  .client-profile {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background: #F7F8FC;
+    padding: 0 30px 40px 30px;
+    .client-header {
+      height: 10%;
+    }
+    .client-page {
+      height: 90%;
+
+    }
+  }
+}

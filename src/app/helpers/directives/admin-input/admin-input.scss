@@ -1,0 +1,30 @@
+.admin-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.admin-input-label {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #9FA2B4;
+}
+.admin-input {
+  width: 100%;
+  height: 40px;
+  background: #f8f8f8;
+  border: 1px solid #cacaca;
+  border-radius: 8px;
+  outline: none;
+  padding: 7px 8px 11px 10px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #4B506D;
+  opacity: 0.4;
+  &.ng-invalid.ng-touched {
+    background-color: rgba(230, 61, 61, 0.05);
+    border-color: #E63D3D;
+  }
+}

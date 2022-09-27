@@ -1,0 +1,51 @@
+<div class="settings-block">
+  <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
+<!--    <div class="names">-->
+      <div class="formcontrol-wrapper">
+        <input
+          appAdminInput
+          formControlName="firstName"
+          label="first name"
+          placeholder="First name"
+          type="text">
+              <p
+                *ngIf="this.form.get('firstName').touched && this.form.get('firstName')?.errors?.latin"
+                class="error"
+                [@fadeInOut]>
+                Please use only latin
+              </p>
+      </div>
+      <div class="formcontrol-wrapper">
+        <input
+          appAdminInput
+          formControlName="lastName"
+          label="last name"
+          placeholder="Last name"
+          type="text">
+        <p
+          *ngIf="this.form.get('lastName').touched && this.form.get('lastName')?.errors?.latin"
+          class="error"
+          [@fadeInOut]>
+          Please use only latin
+        </p>
+      </div>
+
+<!--    </div>-->
+<!--    <div class="data">-->
+      <div class="formcontrol-wrapper">
+        <input
+          formControlName="email"
+          label="email"
+          placeholder="Email"
+          appAdminInput>
+        <p
+          *ngIf="this.form.get('email').touched && this.form.get('email')?.errors?.email"
+          class="error"
+          [@fadeInOut]>
+          Enter correct email
+        </p>
+      </div>
+      <div class="formcontrol-wrapper"><button appAdminButton>Save</button></div>
+<!--    </div>-->
+  </form>
+</div>

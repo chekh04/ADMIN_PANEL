@@ -1,0 +1,20 @@
+<div class="sidenav">
+  <div class="sidenav-logo">
+    <img src="./assets/icons/sidenav-icons/panel-logo.svg" alt="logo">
+    <div class="sidenav-logo-text">Dashboard Kit</div>
+  </div>
+  <ul class="sidenav-list">
+    <li
+      *ngFor="let option of sidenavOptions"
+      [routerLink]="option.link"
+      routerLinkActive="active-route"
+      class="sidenav-list-item">
+      <div class="item-content">
+<!--        <img [src]="option.icon"  alt="icon">-->
+        <div [style.-webkit-mask]="'url(' + option.icon + ') center no-repeat'" class="img"></div>
+        <div class="text">{{option.name}}</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
