@@ -1,0 +1,21 @@
+
+p {
+  font-family: Lato;
+}
+
+::ng-deep .myCircle:hover {
+  stroke: black;
+  .chart {
+    svg {
+      g {
+        g {
+          path {
+            visibility: hidden;
+          }
+        }
+      }
+
+    }
+  }
+}
+

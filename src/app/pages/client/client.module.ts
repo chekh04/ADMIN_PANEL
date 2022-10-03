@@ -14,6 +14,7 @@ import { AdminButtonModule } from "../../helpers/directives/admin-button/admin-b
 import { MatSelectModule } from "@angular/material/select";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AddContactDialogComponent } from './dialogs/add-contact-dialog/add-contact-dialog.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { AddContactDialogComponent } from './dialogs/add-contact-dialog/add-cont
     ClientHeaderComponent,
     AddTicketDialogComponent,
     AddContactDialogComponent,
+    LineChartComponent,
   ],
-  exports: [ClientComponent],
+    exports: [ClientComponent, LineChartComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
