@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LineChartModel } from "../../../components/line-chart/line-chart.component";
 
 
 @Component({
@@ -8,15 +7,10 @@ import { LineChartModel } from "../../../components/line-chart/line-chart.compon
   styleUrls: ['./client-overview.component.scss']
 })
 export class ClientOverviewComponent implements OnInit {
-  public data: LineChartModel[] = [
-    {x: 0, y: 0},
-    {x: 1, y: 3},
-    {x: 2, y: 12},
-    {x: 3, y: 8},
-    {x: 4, y: 17},
-    {x: 5, y: 15},
-    {x: 6, y: 20}];
-
+  public chartData = [
+    [10,18,24,17,26,37,30,23,26,29,37,34,37,30,25,23,27,32, 30,31],
+    [15,10,13,18,30,28,20,25,38,30,25,20,17,28,33,28,30,24,20,27]
+  ]
   constructor() { }
 
   ngOnInit(): void {
