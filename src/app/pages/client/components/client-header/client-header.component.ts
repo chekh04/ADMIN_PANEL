@@ -11,26 +11,14 @@ import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from "@angular/rou
 export class ClientHeaderComponent implements OnInit {
 
 
-  public title: string;
+  public title$: Observable<string>;
 
-  constructor(private headerService: HeaderService,
-              private router: Router) {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        if (event instanceof RouterEvent) {
-          this.title = this.getHeaderTitle(event.url)
-        }
-      });
+  constructor(private headerService: HeaderService) {
+    this.title$ = this.headerService.getHeaderTitle();
   }
 
   ngOnInit(): void {
   }
 
-  private getHeaderTitle(v:string) :string {
-    const arr = v.split('/');
-    const temp = arr[arr.length-1].split('')
-    return temp[0].toUpperCase() + temp.join('').slice(1, temp.length);
-  }
 
 }
