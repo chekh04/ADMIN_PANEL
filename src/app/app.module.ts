@@ -6,6 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignPagesModule } from "./pages/sign-pages/sign-pages.module";
 import { ClientModule } from "./pages/client/client.module";
 import { MatNativeDateModule } from "@angular/material/core";
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { MatNativeDateModule } from "@angular/material/core";
     BrowserAnimationsModule,
     SignPagesModule,
     ClientModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   exports: [
