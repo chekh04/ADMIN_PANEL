@@ -4,6 +4,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import { CommonModule } from "@angular/common";
 import { ClientContactsRoutingModule } from "./client-contacts-routing.module";
+import { EffectsModule } from "@ngrx/effects";
+import { ContactsEffects } from "../../../../store/effects/contacts.effects";
 
 @NgModule({
   declarations: [ClientContactsComponent],
@@ -11,7 +13,8 @@ import { ClientContactsRoutingModule } from "./client-contacts-routing.module";
     MatPaginatorModule,
     MatTableModule,
     CommonModule,
-    ClientContactsRoutingModule
+    ClientContactsRoutingModule,
+    EffectsModule.forFeature([ContactsEffects])
   ]
 })
 

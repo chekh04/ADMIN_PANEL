@@ -1,5 +1,7 @@
+import { Ticket } from "../../core/models/ticket";
+
 export interface TicketState {
-  data: any,
+  data: Ticket[],
   length?: number
 }
 

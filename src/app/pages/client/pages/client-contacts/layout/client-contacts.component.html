@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="buttons-block">
-    <div (click)="sortData()" class="sort">
+<!--    <div (click)="sortData()" class="sort">-->
     <button (click)="openModal()" class="add-btn"><img src="./assets/icons/plus-icon.svg" alt="plus"> <span>Add contact</span></button>
   </div>
-  </div>
+<!--  </div>-->
   <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <table mat-table [dataSource]="dataSource$" class="mat-elevation-z8 demo-table">
       <!-- Position Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -52,7 +52,7 @@
     </table>
   </div>
   <div class="pagination-block">
-    <mat-paginator [length]="totalTicketsLength$ | async"
+    <mat-paginator [length]="totalLength$ | async"
                    [pageSize]="6"
                    [pageSizeOptions]="[2,4,6]"
                    (page)="onToggle($event)"

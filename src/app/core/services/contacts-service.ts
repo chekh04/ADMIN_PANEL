@@ -121,7 +121,7 @@ export class ContactsService {
 
   }
 
-  public updateDataSource(i: number, size: number = 7): void {
+  public updateDataSource(i: number = 0, size: number = 6): void {
     this.contactsLength.next(ELEMENT_DATA.length)
     const arr = ELEMENT_DATA.slice(i * size, size * (i + 1));
     this.contactsSource.next(arr)
@@ -136,14 +136,14 @@ export class ContactsService {
 
   public addContact(contact: any): void {
     const body: Contact = {
-      name: contact.customerName,
+      name: contact.name,
       userPhoto: contact.photo,
       date: contact.date,
       email: contact.email,
       address: contact.address
     }
     ELEMENT_DATA.unshift(body)
-    this.updateDataSource(0,6);
+    this.updateDataSource();
   }
 
 }

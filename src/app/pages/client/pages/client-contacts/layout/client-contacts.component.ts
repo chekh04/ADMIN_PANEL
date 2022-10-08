@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable } from "rxjs";
+import { combineLatest, filter, map, Observable, tap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { PageEvent } from "@angular/material/paginator";
 import { ContactsService } from "../../../../../core/services/contacts-service";
 import { Contact } from "../../../../../core/models/contact-model";
 import { AddContactDialogComponent } from "../../../dialogs/add-contact-dialog/add-contact-dialog.component";
+import { Store } from "@ngrx/store";
+import {
+  invokeEffectOnContactAdd,
+  invokeEffectOnInit,
+  invokeEffectOnToggle
+} from "../../../../../store/actions/contacts.actions";
+import { contactsLengthSelector, contactsSourceSelector } from "../../../../../store/selectors/contacts.selectors";
 
 @Component({
   selector: 'app-client-contacts',
@@ -13,15 +20,15 @@ import { AddContactDialogComponent } from "../../../dialogs/add-contact-dialog/a
 })
 export class ClientContactsComponent implements OnInit {
 
-  public dataSource: Observable<Contact[]> = this.contactsService.contactsSource$;
-  public totalTicketsLength$: Observable<number> = this.contactsService.contactsLength$;
+  public dataSource$: Observable<Contact[]> = this.store.select(contactsSourceSelector);
+  public totalLength$: Observable<number> = this.store.select(contactsLengthSelector);
 
   constructor(public dialog: MatDialog,
-              private contactsService: ContactsService) {
+              private store: Store) {
+    this.store.dispatch(invokeEffectOnInit())
   }
 
-  ngOnInit(): void {
-    this.contactsService.updateDataSource(0);
+  ngOnInit() {
   }
 
   displayedColumns: string[] = ['name', 'email', 'address', 'date'];
@@ -31,17 +38,14 @@ export class ClientContactsComponent implements OnInit {
     this.dialog
       .open(AddContactDialogComponent, {width: '380px', height: '660px'})
       .afterClosed()
-      .pipe(filter(el => !!el))
-      .subscribe(el => {
-      this.contactsService.addContact(el);
-    })
+      .pipe(
+        filter(el => !!el),
+        map(res => this.store.dispatch(invokeEffectOnContactAdd({data: res})))
+      ).subscribe()
   }
 
   public onToggle(e: PageEvent): void {
-    this.contactsService.updateDataSource(e.pageIndex, e.pageSize)
-  }
-  public sortData(): void {
-    // this.contactsService.sortDataSource();
+    this.store.dispatch(invokeEffectOnToggle({index: e.pageIndex, size: e.pageSize}))
   }
 
 }
