@@ -9,6 +9,8 @@ import { ForgetPasswordComponent } from "./forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CheckEmailComponent } from './check-email/check-email.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { EffectsModule } from "@ngrx/effects";
+import { UserEffects } from "../../store/effects/user.effects";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     AdminInputModule,
     SignPagesRoutingModule,
     AdminButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forFeature([UserEffects])
   ]
 })
 

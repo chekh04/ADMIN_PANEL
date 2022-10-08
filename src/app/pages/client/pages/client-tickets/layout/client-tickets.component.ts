@@ -14,6 +14,7 @@ import {
   updateState
 } from "../../../../../store/actions/tickets-actions";
 import { ticketsDataSelector, ticketsLengthSelector } from "../../../../../store/selectors/tickets-selectors";
+import { invokeEffectCheckStorage } from "../../../../../store/actions/user.actions";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ClientTicketsComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private store: Store) {
-
+    this.store.dispatch(invokeEffectCheckStorage());
     this.store.dispatch(invokeEffect())
     this.ticketsSource$ = this.store.select(ticketsDataSelector);
     this.ticketsListLength$ = this.store.select(ticketsLengthSelector);

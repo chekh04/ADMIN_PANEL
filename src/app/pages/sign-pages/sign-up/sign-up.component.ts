@@ -5,8 +5,19 @@ import { onlyEmail } from "../../../helpers/validators/only-email";
 import { onlyLatin } from "../../../helpers/validators/only-latin";
 import { checkPasswords } from "../../../helpers/validators/confirm-password";
 import { UserService } from "../../../core/services/user-service";
-import { MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { invokeEffectCheckStorage, invokeEffectOnAddUserInfo } from "../../../store/actions/user.actions";
+
+export interface UserInfo {
+  email: string,
+  name: string,
+  surname: string,
+  passwords: {
+    password: string,
+    confirmPassword: string
+  }
+}
 
 
 @Component({
@@ -31,9 +42,10 @@ export class SignUpComponent implements OnInit {
   public form!: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private userService: UserService,
+              private store: Store,
               private router: Router) {
     this.form = this.createGroup();
+
   }
 
   ngOnInit(): void {
@@ -55,11 +67,11 @@ export class SignUpComponent implements OnInit {
     el.type === "password" ? el.type = 'text' : el.type = "password"
   }
 
-  public submitForm(): void {
+  public submitForm(value: UserInfo): void {
     if(this.form.status === "INVALID") {
       return;
     }
-    this.userService.updateUserData(this.form.value);
+    this.store.dispatch(invokeEffectOnAddUserInfo({userInfo: value}));
     this.router.navigate(['/'])
   }
 }

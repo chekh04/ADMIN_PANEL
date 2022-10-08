@@ -11,7 +11,7 @@
     <form
       [formGroup]="form"
       class="modal-body"
-      (ngSubmit)="submitForm()">
+      (ngSubmit)="submitForm(form.value)">
       <div class="formcontrol-wrapper">
         <input
           formControlName="email"
