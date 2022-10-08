@@ -7,7 +7,7 @@
     <button (click)="openModal()" class="add-btn"><img src="./assets/icons/plus-icon.svg" alt="plus"> <span>Add ticket</span></button>
   </div>
  <div class="table-wrapper">
-   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+   <table mat-table [dataSource]="ticketsSource$" class="mat-elevation-z8 demo-table">
      <!-- Position Column -->
      <ng-container matColumnDef="details">
        <th mat-header-cell *matHeaderCellDef>Ticket details</th>
@@ -61,9 +61,9 @@
    </table>
  </div>
   <div class="pagination-block">
-    <mat-paginator [length]="totalTicketsLength$ | async"
-                   [pageSize]="6"
-                   [pageSizeOptions]="[2,4,6]"
+    <mat-paginator [length]="ticketsListLength$ | async"
+                   [pageSize]="7"
+                   [pageSizeOptions]="[2,4,7]"
                    (page)="onToggle($event)"
                    aria-label="Select page">
     </mat-paginator>

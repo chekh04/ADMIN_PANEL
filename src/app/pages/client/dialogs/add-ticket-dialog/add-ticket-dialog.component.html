@@ -1,6 +1,6 @@
 <div class="modal">
   <div class="modal-title">Add ticket</div>
-  <form [formGroup]="form" (ngSubmit)="onSave()" class="modal-form">
+  <form [formGroup]="form" (ngSubmit)="onSave(form.value)" class="modal-form">
     <div class="add-file">
       <img src="./assets/icons/add-file-icon.svg" alt="file">
       <div class="label">Add photo</div>

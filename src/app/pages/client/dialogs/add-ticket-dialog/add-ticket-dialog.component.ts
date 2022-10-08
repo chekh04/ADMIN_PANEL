@@ -8,6 +8,14 @@ function capitalizeFirstLetter(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+export interface AddTicketData {
+  description: string,
+  date: Date,
+  customerName: string,
+  priority: string,
+  photo: string
+}
+
 @Component({
   selector: 'app-add-ticket-dialog',
   templateUrl: './add-ticket-dialog.component.html',
@@ -26,8 +34,8 @@ export class AddTicketDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onSave(): void {
-    this.dialogRef.close(this.form.value)
+  public onSave(value: AddTicketData): void {
+    this.dialogRef.close(value)
   }
 
   private createFormGroup(): FormGroup {
@@ -46,7 +54,6 @@ export class AddTicketDialogComponent implements OnInit {
         var reader = new FileReader();
         reader.onload = (event: ProgressEvent) => {
           this.url = (<FileReader>event.target).result;
-          console.log(this.url)
           this.form.get('photo')?.setValue((<FileReader>event.target).result)
         }
         reader.readAsDataURL(e.target.files[0])

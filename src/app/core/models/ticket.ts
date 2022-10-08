@@ -2,6 +2,6 @@ export interface Ticket {
   image: string,
   message: string,
   userName: string,
-  date: string,
+  date: string | Date,
   priority: string
 }

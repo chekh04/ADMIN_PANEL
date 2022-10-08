@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable, } from "rxjs";
+import { combineLatest, filter, map, Observable, } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { AddTicketDialogComponent } from "../../../dialogs/add-ticket-dialog/add-ticket-dialog.component";
 import { Ticket } from "../../../../../core/models/ticket";
 import { PageEvent } from "@angular/material/paginator";
-import { TicketsService } from "../../../../../core/services/tickets-service";
+import { Store } from "@ngrx/store";
+import {
+  invokeEffectOnSort,
+  invokeEffectOnTogglePage,
+  invokeAddTicketEffect,
+  invokeEffect,
+  updateStateData,
+  updateState
+} from "../../../../../store/actions/tickets-actions";
+import { ticketsDataSelector, ticketsLengthSelector } from "../../../../../store/selectors/tickets-selectors";
+
 
 @Component({
   selector: 'app-client-tickets',
@@ -13,35 +23,38 @@ import { TicketsService } from "../../../../../core/services/tickets-service";
 })
 export class ClientTicketsComponent implements OnInit {
 
-  public dataSource: Observable<Ticket[]> = this.ticketsService.ticketsSource$;
-  public totalTicketsLength$: Observable<number> = this.ticketsService.ticketsLength$;
+  public ticketsSource$: Observable<Ticket[]>;
+  public ticketsListLength$: Observable<number>;
 
   constructor(public dialog: MatDialog,
-              private ticketsService: TicketsService) {
+              private store: Store) {
+
+    this.store.dispatch(invokeEffect())
+    this.ticketsSource$ = this.store.select(ticketsDataSelector);
+    this.ticketsListLength$ = this.store.select(ticketsLengthSelector);
   }
 
   ngOnInit(): void {
-    this.ticketsService.updateDataSource(0);
   }
 
   displayedColumns: string[] = ['details', 'name', 'date', 'priority'];
-
 
   public openModal(): void {
     this.dialog
       .open(AddTicketDialogComponent, {width: '380px', height: '660px'})
       .afterClosed()
-      .pipe(filter(el => !!el))
-      .subscribe(el => {
-        // console.log(el)
-      this.ticketsService.addTicket(el);
-    })
+      .pipe(
+        filter(el => !!el),
+        map(el => this.store.dispatch(invokeAddTicketEffect({data: el})))
+      ).subscribe()
   }
 
   public onToggle(e: PageEvent): void {
-    this.ticketsService.updateDataSource(e.pageIndex, e.pageSize)
+    this.store.dispatch(invokeEffectOnTogglePage({index: e.pageIndex, size: e.pageSize}));
+
   }
+
   public sortData(): void {
-    this.ticketsService.sortDataSource();
+    this.store.dispatch(invokeEffectOnSort());
   }
 }
