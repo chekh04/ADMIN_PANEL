@@ -16,30 +16,30 @@
         <input
 
           formControlName="email"
-        appAdminInput
-        label="email"
-        placeholder="Email"
-        type="text">
-          <p
-            *ngIf="formState.email.touched && formState.email.errors?.required"
-            class="error"
-            [@fadeInOut]>
-            This field is required
-          </p>
-          <p
-            *ngIf="formState.email.touched && formState.email.errors?.email"
-            class="error"
-            [@fadeInOut]>
-            Enter correct email
-          </p>
+          appAdminInput
+          label="email"
+          placeholder="Email"
+          type="text">
+        <p
+          *ngIf="formState.email.touched && formState.email.errors?.required"
+          class="error"
+          [@fadeInOut]>
+          This field is required
+        </p>
+        <p
+          *ngIf="formState.email.touched && formState.email.errors?.email"
+          class="error"
+          [@fadeInOut]>
+          Enter correct email
+        </p>
       </div>
       <div class="formcontrol-wrapper">
         <input
           formControlName="name"
-        appAdminInput
-        label="first name"
-        placeholder="First name"
-        type="text">
+          appAdminInput
+          label="first name"
+          placeholder="First name"
+          type="text">
         <p
           *ngIf="formState.name.touched && formState.name.errors?.required"
           class="error"
@@ -56,10 +56,10 @@
       <div class="formcontrol-wrapper">
         <input
           formControlName="surname"
-        appAdminInput
-        label="last name"
-        placeholder="Last name"
-        type="text">
+          appAdminInput
+          label="last name"
+          placeholder="Last name"
+          type="text">
         <p
           *ngIf="formState.surname.touched && formState.surname.errors?.required"
           class="error"
@@ -73,52 +73,76 @@
           Please use only latin
         </p>
       </div>
-<div formGroupName="passwords" class="passwords">
-  <div class="password-input">
+<div class="advantages-group" formGroupName="advantages">
+  <button (click)="addAdvantages()">Add advantages</button>
+  <div
+    *ngFor="let control of formState.advantages.controls; let idx = index"
+    class="formcontrol-wrapper">
     <input
-      #password
-      formControlName="password"
+      [formControlName]="idx"
       appAdminInput
-      label="password"
-      placeholder="Password"
-      type="password">
-    <img (click)="changePasswordInputType(password)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
+      label="advantage"
+      placeholder="Advantage"
+      type="text">
+              <p
+                *ngIf="formState.advantages.controls[idx].touched && formState.advantages.controls[idx].errors?.latin"
+                class="error"
+                [@fadeInOut]>
+                Please use only latin
+              </p>
   </div>
-          <p
-            *ngIf="formState.password.touched && formState.password.errors?.required"
-            class="error"
-            [@fadeInOut]>
-            This field is required
-          </p>
-  <div class="password-input">
-    <input
-      #confirmPassword
-      formControlName="confirmPassword"
-      appAdminInput
-      label="confirm password"
-      placeholder="Confirm password"
-      type="password">
-    <img (click)="changePasswordInputType(confirmPassword)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
-  </div>
-          <p
-            *ngIf="formState.confirmPassword.touched && formState.confirmPassword.errors?.required"
-            class="error"
-            [@fadeInOut]>
-            This field is required
-          </p>
-<!--  <p-->
-<!--    *ngIf="-->
-<!--    form.get('confirmPassword').touched &&-->
-<!--    !form.get('confirmPassword').errors?.required "-->
-<!--    class="error"-->
-<!--    [@fadeInOut]>-->
-<!--    Confirm password is wrong-->
-<!--  </p>-->
 </div>
-
-      <button class="modal-btn">Register</button>
+      <button
+        *ngIf="!firstStepIsFilled"
+        [disabled]="nextStepIsDisabled"
+        (click)="checkForControlsFilled()"
+        appAdminButton>Next Step
+      </button>
+      <div *ngIf="firstStepIsFilled" class="passwords">
+        <div class="password-input">
+          <input
+            #password
+            formControlName="password"
+            appAdminInput
+            label="password"
+            placeholder="Password"
+            type="password">
+          <img (click)="changePasswordInputType(password)" src="./assets/icons/sidenav-icons/password-eye.svg"
+               alt="eye">
+        </div>
+        <p
+          *ngIf="formState.password.touched && formState.password.errors?.required"
+          class="error"
+          [@fadeInOut]>
+          This field is required
+        </p>
+        <div class="password-input">
+          <input
+            #confirmPassword
+            formControlName="confirmPassword"
+            appAdminInput
+            label="confirm password"
+            placeholder="Confirm password"
+            type="password">
+          <img (click)="changePasswordInputType(confirmPassword)" src="./assets/icons/sidenav-icons/password-eye.svg"
+               alt="eye">
+        </div>
+        <p
+          *ngIf="formState.confirmPassword.touched && formState.confirmPassword.errors?.required"
+          class="error"
+          [@fadeInOut]>
+          This field is required
+        </p>
+        <!--  <p-->
+        <!--    *ngIf="-->
+        <!--    form.get('confirmPassword').touched &&-->
+        <!--    !form.get('confirmPassword').errors?.required "-->
+        <!--    class="error"-->
+        <!--    [@fadeInOut]>-->
+        <!--    Confirm password is wrong-->
+        <!--  </p>-->
+        <button class="modal-btn">Register</button>
+      </div>
     </form>
-
-
   </div>
 </div>

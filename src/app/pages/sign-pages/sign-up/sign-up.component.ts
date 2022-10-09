@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { onlyEmail } from "../../../helpers/validators/only-email";
 import { onlyLatin } from "../../../helpers/validators/only-latin";
@@ -8,6 +8,7 @@ import { UserService } from "../../../core/services/user-service";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { invokeEffectCheckStorage, invokeEffectOnAddUserInfo } from "../../../store/actions/user.actions";
+import { tap } from "rxjs";
 
 export interface UserInfo {
   email: string,
@@ -41,16 +42,24 @@ export interface UserInfo {
 export class SignUpComponent implements OnInit {
   public form!: FormGroup;
   public formState: any;
+  public firstStepIsFilled: boolean = false;
+  public nextStepIsDisabled: boolean = true;
 
   constructor(private fb: FormBuilder,
               private store: Store,
               private router: Router) {
     this.form = this.createGroup();
     this.formState = this.form.controls;
-    console.log(this.formState)
   }
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe(() => {
+      let validArr = [];
+      for(let key in this.formState) {
+        this.formState[key].valid ? validArr.push(this.formState[key]) : null;
+      }
+      validArr.length === 3 ? this.nextStepIsDisabled = false : null
+    })
   }
 
   private createGroup(): FormGroup {
@@ -59,8 +68,9 @@ export class SignUpComponent implements OnInit {
       name: [null, [Validators.required, onlyLatin()]],
       surname: [null, [Validators.required, onlyLatin()]],
       // passwords: this.fb.group({
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required]
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      advantages: this.fb.array([])
       // }, {validators: checkPasswords()})
     })
   }
@@ -70,10 +80,19 @@ export class SignUpComponent implements OnInit {
   }
 
   public submitForm(value: UserInfo): void {
-    if(this.form.status === "INVALID") {
+    if (this.form.status === "INVALID") {
       return;
     }
     this.store.dispatch(invokeEffectOnAddUserInfo({userInfo: value}));
     this.router.navigate(['/'])
+  }
+
+  public checkForControlsFilled(): void {
+    this.firstStepIsFilled = true;
+  }
+
+  public addAdvantages(): void {
+    const control = this.fb.control('', [onlyLatin()]);
+    (this.form.get('advantages') as FormArray).push(control)
   }
 }
