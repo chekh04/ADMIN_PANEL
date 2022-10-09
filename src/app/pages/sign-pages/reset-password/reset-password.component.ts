@@ -23,9 +23,13 @@ import { animate, style, transition, trigger } from "@angular/animations";
 })
 export class ResetPasswordComponent implements OnInit {
   public form!: FormGroup;
+  public formState: any;
 
   constructor(private fb: FormBuilder) {
     this.form = this.createFormGroup();
+    this.formState = this.form.controls;
+    console.log(this.formState)
+    console.log(typeof this.formState)
   }
 
   ngOnInit(): void {

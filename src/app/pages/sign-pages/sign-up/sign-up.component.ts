@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { onlyEmail } from "../../../helpers/validators/only-email";
 import { onlyLatin } from "../../../helpers/validators/only-latin";
@@ -40,12 +40,14 @@ export interface UserInfo {
 })
 export class SignUpComponent implements OnInit {
   public form!: FormGroup;
+  public formState: any;
 
   constructor(private fb: FormBuilder,
               private store: Store,
               private router: Router) {
     this.form = this.createGroup();
-
+    this.formState = this.form.controls;
+    console.log(this.formState)
   }
 
   ngOnInit(): void {
@@ -56,10 +58,10 @@ export class SignUpComponent implements OnInit {
       email: [null, [Validators.required, onlyEmail()]],
       name: [null, [Validators.required, onlyLatin()]],
       surname: [null, [Validators.required, onlyLatin()]],
-      passwords: this.fb.group({
+      // passwords: this.fb.group({
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
-      }, {validators: checkPasswords()})
+      // }, {validators: checkPasswords()})
     })
   }
 

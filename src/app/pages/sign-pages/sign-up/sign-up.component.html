@@ -14,19 +14,20 @@
       (ngSubmit)="submitForm(form.value)">
       <div class="formcontrol-wrapper">
         <input
+
           formControlName="email"
         appAdminInput
         label="email"
         placeholder="Email"
         type="text">
           <p
-            *ngIf="this.form.get('email').touched && this.form.get('email').errors?.required"
+            *ngIf="formState.email.touched && formState.email.errors?.required"
             class="error"
             [@fadeInOut]>
             This field is required
           </p>
           <p
-            *ngIf="this.form.get('email').touched && this.form.get('email')?.errors?.email"
+            *ngIf="formState.email.touched && formState.email.errors?.email"
             class="error"
             [@fadeInOut]>
             Enter correct email
@@ -40,13 +41,13 @@
         placeholder="First name"
         type="text">
         <p
-          *ngIf="this.form.get('name').touched && this.form.get('name').errors?.required"
+          *ngIf="formState.name.touched && formState.name.errors?.required"
           class="error"
           [@fadeInOut]>
           This field is required
         </p>
         <p
-          *ngIf="this.form.get('name').touched && this.form.get('name')?.errors?.latin"
+          *ngIf="formState.name.touched && formState.name?.errors?.latin"
           class="error"
           [@fadeInOut]>
           Please use only latin
@@ -60,13 +61,13 @@
         placeholder="Last name"
         type="text">
         <p
-          *ngIf="this.form.get('surname').touched && this.form.get('surname').errors?.required"
+          *ngIf="formState.surname.touched && formState.surname.errors?.required"
           class="error"
           [@fadeInOut]>
           This field is required
         </p>
         <p
-          *ngIf="this.form.get('surname').touched && this.form.get('surname')?.errors?.latin"
+          *ngIf="formState.surname.touched && formState.surname.errors?.latin"
           class="error"
           [@fadeInOut]>
           Please use only latin
@@ -84,7 +85,7 @@
     <img (click)="changePasswordInputType(password)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
   </div>
           <p
-            *ngIf="this.form.get('passwords').get('password').touched && this.form.get('passwords').get('password').errors?.required"
+            *ngIf="formState.password.touched && formState.password.errors?.required"
             class="error"
             [@fadeInOut]>
             This field is required
@@ -100,20 +101,19 @@
     <img (click)="changePasswordInputType(confirmPassword)" src="./assets/icons/sidenav-icons/password-eye.svg" alt="eye">
   </div>
           <p
-            *ngIf="this.form.get('passwords').get('confirmPassword').touched && this.form.get('passwords').get('confirmPassword').errors?.required"
+            *ngIf="formState.confirmPassword.touched && formState.confirmPassword.errors?.required"
             class="error"
             [@fadeInOut]>
             This field is required
           </p>
-  <p
-    *ngIf="
-    this.form.get('passwords').get('confirmPassword').touched &&
-    !this.form.get('passwords').get('confirmPassword').errors?.required &&
-    this.form.get('passwords').errors?.notSame"
-    class="error"
-    [@fadeInOut]>
-    Confirm password is wrong
-  </p>
+<!--  <p-->
+<!--    *ngIf="-->
+<!--    form.get('confirmPassword').touched &&-->
+<!--    !form.get('confirmPassword').errors?.required "-->
+<!--    class="error"-->
+<!--    [@fadeInOut]>-->
+<!--    Confirm password is wrong-->
+<!--  </p>-->
 </div>
 
       <button class="modal-btn">Register</button>
